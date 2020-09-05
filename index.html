@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--R1D2-->
+    <main>
+        <div id="display">0</div>
+        <div id="keypad">
+            <button class="clear-all">AC</button>
+            <button class="clear">C</button>
+            <button onclick="divide();" class="operation">/</button>
+            <br>
+            <button onclick="displayInt('7');" class="integer">7</button>
+            <button onclick="displayInt('8');" class="integer">8</button>
+            <button onclick="displayInt('9');" class="integer">9</button>
+            <button onclick="multiply();" class="operation">x</button>
+            <br>
+            <button onclick="displayInt('4');" class="integer">4</button>
+            <button onclick="displayInt('5');" class="integer">5</button>
+            <button onclick="displayInt('6');" class="integer">6</button>
+            <button onclick="subtract();" class="operation">-</button>
+            <br>
+            <button onclick="displayInt('1');" class="integer">1</button>
+            <button onclick="displayInt('2');" class="integer">2</button>
+            <button onclick="displayInt('3');" class="integer">3</button>
+            <button onclick="add();" class="operation">+</button>
+            <br>
+            <button onclick="displayInt('0');" class="integer">0</button>
+            <button onclick="displayAnswer();" class="operation">=</button>
+        </div>
+    </main>
+    <script>
+        var display = document.getElementById("display");
+
+        // arithmetic variables
+        var num1 = 0;
+        var num2 = 0;
+
+        // function displays integer on the display
+        function displayInt(integer) {
+            display.textContent = display.textContent + integer;
+            num1 = display.textContent;
+            console.log(num1);
+        }
+
+        // function divides two integers
+        function divide() {
+            // division
+        }
+
+        // function multiplies two integers
+        function multiply() {
+            // multiplication
+        }
+
+        // function subtracts two integers
+        function subtract() {
+            // subtraction
+        }
+
+        // function adds two integers
+        function add() {
+            // addition
+        }
+
+        // function displays answer
+        function displayAnswer() {
+            // answer
+        }
+    </script>
+</body>
+</html>
