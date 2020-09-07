@@ -45,31 +45,21 @@
         var int1 = 0;
         var int2 = 0;
 
-        // function displays a zero on load
-        function displayZero() {
-            display.textContent = '0';
-        }
-
         // function displays integer on the display
         function displayInt(integer) {
-
             checkIntSize();
 
-            display.textContent = integer;
+            if (display.textContent === '0') {
+                display.textContent = integer;
+            } else {
+                display.textContent = display.textContent + integer;
 
-            console.log(display.textContent);
-            console.log(integer);
-
-
+            }
         }
-
-        // function removeZero()  {
-        //     display.textContent = '';
-        // }
 
         function checkIntSize() {
             if (display.textContent > 999999) {
-                alert('Yikes! Too many digits for this calculator.');
+                alert('Too many digits for this calculator.');
             }
         }
 
@@ -94,11 +84,11 @@
         }
 
         function clearEntry() {
-            displayZero();
+            display.textContent = '0';
         }
 
         function clearAll() {
-            displayZero();
+            display.textContent = '0';
         }
 
         // function displays answer
