@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="displayZero();">
+<body>
     <h1>JavaScript Calculator</h1>
     <main>
-        <div id="display"></div>
+        <div id="display">0</div>
         <div id="keypad">
             <button onclick="clearAll();" id="clear-all-button">AC</button>
             <button onclick="clearEntry();" id="clear-button">C</button>
@@ -37,12 +37,13 @@
             <button onclick="displayAnswer();" id="equal-button">=</button>
         </div>
     </main>
+
     <script>
         var display = document.getElementById("display");
 
         // arithmetic variables
-        var num1 = 0;
-        var num2 = 0;
+        var int1 = 0;
+        var int2 = 0;
 
         // function displays a zero on load
         function displayZero() {
@@ -51,16 +52,20 @@
 
         // function displays integer on the display
         function displayInt(integer) {
+
             checkIntSize();
-            display.textContent = display.textContent + integer;
 
-            num1 = display.textContent;
-            console.log(num1);            
+            display.textContent = integer;
+
+            console.log(display.textContent);
+            console.log(integer);
+
+
         }
 
-        function removeZero()  {
-            display.textContent = '';
-        }
+        // function removeZero()  {
+        //     display.textContent = '';
+        // }
 
         function checkIntSize() {
             if (display.textContent > 999999) {
@@ -102,4 +107,5 @@
         }
     </script>
 </body>
+
 </html>
