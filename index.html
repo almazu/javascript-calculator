@@ -16,22 +16,22 @@
         <div id="keypad">
             <button onclick="clearAll();" id="clear-all-button">AC</button>
             <button onclick="clearEntry();" id="clear-button">C</button>
-            <button onclick="divide();" class="operation">/</button>
+            <button id="divide">/</button>
             <br>
-            <button onclick="displayInt('7');" class="integer">7</button>
-            <button onclick="displayInt('8');" class="integer">8</button>
-            <button onclick="displayInt('9');" class="integer">9</button>
-            <button onclick="multiply();" class="operation">x</button>
+            <button class="integer">7</button>
+            <button class="integer">8</button>
+            <button class="integer">9</button>
+            <button id="multiply">x</button>
             <br>
-            <button onclick="displayInt('4');" class="integer">4</button>
-            <button onclick="displayInt('5');" class="integer">5</button>
-            <button onclick="displayInt('6');" class="integer">6</button>
-            <button onclick="subtract();" class="operation">-</button>
+            <button class="integer">4</button>
+            <button class="integer">5</button>
+            <button class="integer">6</button>
+            <button id="subtract">-</button>
             <br>
-            <button onclick="displayInt('1');" class="integer">1</button>
-            <button onclick="displayInt('2');" class="integer">2</button>
-            <button onclick="displayInt('3');" class="integer">3</button>
-            <button onclick="add();" class="operation">+</button>
+            <button class="integer">1</button>
+            <button class="integer">2</button>
+            <button class="integer">3</button>
+            <button id="add">+</button>
             <br>
             <button onclick="displayInt('0');" id="zero-button">0</button>
             <button onclick="displayAnswer();" id="equal-button">=</button>
@@ -41,46 +41,67 @@
     <script>
         var display = document.getElementById("display");
 
-        // arithmetic variables
+        var keypad = document.getElementById("keypad");
+        var integerButton = keypad.querySelector(".integer");
+        
+        var divideButton = document.getElementById("divide");
+        var multiplyButton = document.getElementById("multiply");
+        var subtractButton = document.getElementById("subtract");
+        var addButton = document.getElementById("add");
+        var equalButton = document.getElementById("equal-button");
+
+        var maxDigits = 99999999;
         var int1 = 0;
         var int2 = 0;
 
+        divideButton.addEventListener('click', divideInt);
+        multiplyButton.addEventListener('click', multiplyInt);
+        subtractButton.addEventListener('click', subtractInt);
+        addButton.addEventListener('click', addInt);
+
+        // console.log(integerButton.textContent);
+        console.log(integerButton.textContent);
+
+        keypad.addEventListener('click', function() {
+            displayInt(integerButton.textContent);
+            console.log(integerButton.textContent);
+        });
+        
         // function displays integer on the display
         function displayInt(integer) {
-            checkIntSize();
-
             if (display.textContent === '0') {
-                display.textContent = integer;
+                display.textContent = integer;                
             } else {
                 display.textContent = display.textContent + integer;
-
             }
         }
 
+        // function to check size of the integer
+        // should not be greater than eight digits
         function checkIntSize() {
-            if (display.textContent > 999999) {
+            if (display.textContent > maxDigits) {
                 alert('Too many digits for this calculator.');
             }
         }
 
         // function divides two integers
-        function divide() {
-            // division
+        function divideInt() {
+            console.log("divide symbol clicked");
         }
 
         // function multiplies two integers
-        function multiply() {
-            // multiplication
+        function multiplyInt() {
+            console.log("multiply symbol clicked");
         }
 
         // function subtracts two integers
-        function subtract() {
-            // subtraction
+        function subtractInt() {
+            console.log("subtract symbol clicked");
         }
 
         // function adds two integers
-        function add() {
-            // addition
+        function addInt(e) {
+            console.log("addition symbol clicked");
         }
 
         function clearEntry() {
