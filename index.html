@@ -18,19 +18,19 @@
             <button onclick="clearEntry();" id="clear-button">C</button>
             <button id="divide">/</button>
             <br>
-            <button class="integer">7</button>
-            <button class="integer">8</button>
-            <button class="integer">9</button>
+            <button onclick="displayInt('7');" class="integer">7</button>
+            <button onclick="displayInt('8');" class="integer">8</button>
+            <button onclick="displayInt('9');" class="integer">9</button>
             <button id="multiply">x</button>
             <br>
-            <button class="integer">4</button>
-            <button class="integer">5</button>
-            <button class="integer">6</button>
+            <button onclick="displayInt('4');" class="integer">4</button>
+            <button onclick="displayInt('5');" class="integer">5</button>
+            <button onclick="displayInt('6');" class="integer">6</button>
             <button id="subtract">-</button>
             <br>
-            <button class="integer">1</button>
-            <button class="integer">2</button>
-            <button class="integer">3</button>
+            <button onclick="displayInt('1');" class="integer">1</button>
+            <button onclick="displayInt('2');" class="integer">2</button>
+            <button onclick="displayInt('3');" class="integer">3</button>
             <button id="add">+</button>
             <br>
             <button onclick="displayInt('0');" id="zero-button">0</button>
@@ -38,12 +38,9 @@
         </div>
     </main>
 
-    <script>
+    <script type="text/javascript">
         var display = document.getElementById("display");
 
-        var keypad = document.getElementById("keypad");
-        var integerButton = keypad.querySelector(".integer");
-        
         var divideButton = document.getElementById("divide");
         var multiplyButton = document.getElementById("multiply");
         var subtractButton = document.getElementById("subtract");
@@ -59,28 +56,12 @@
         subtractButton.addEventListener('click', subtractInt);
         addButton.addEventListener('click', addInt);
 
-        // console.log(integerButton.textContent);
-        console.log(integerButton.textContent);
-
-        keypad.addEventListener('click', function() {
-            displayInt(integerButton.textContent);
-            console.log(integerButton.textContent);
-        });
-        
         // function displays integer on the display
         function displayInt(integer) {
             if (display.textContent === '0') {
-                display.textContent = integer;                
+                display.textContent = integer;
             } else {
                 display.textContent = display.textContent + integer;
-            }
-        }
-
-        // function to check size of the integer
-        // should not be greater than eight digits
-        function checkIntSize() {
-            if (display.textContent > maxDigits) {
-                alert('Too many digits for this calculator.');
             }
         }
 
@@ -100,7 +81,7 @@
         }
 
         // function adds two integers
-        function addInt(e) {
+        function addInt() {
             console.log("addition symbol clicked");
         }
 
