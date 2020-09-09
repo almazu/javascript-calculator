@@ -14,89 +14,32 @@
     <main>
         <div id="display">0</div>
         <div id="keypad">
-            <button onclick="clearAll();" id="clear-all-button">AC</button>
-            <button onclick="clearEntry();" id="clear-button">C</button>
+            <button id="clear-all-button">AC</button>
+            <button id="clear-button">C</button>
             <button id="divide">/</button>
             <br>
-            <button onclick="displayInt('7');" class="integer">7</button>
-            <button onclick="displayInt('8');" class="integer">8</button>
-            <button onclick="displayInt('9');" class="integer">9</button>
+            <button class="integer" value="7">7</button>
+            <button class="integer" value="8">8</button>
+            <button class="integer" value="9">9</button>
             <button id="multiply">x</button>
             <br>
-            <button onclick="displayInt('4');" class="integer">4</button>
-            <button onclick="displayInt('5');" class="integer">5</button>
-            <button onclick="displayInt('6');" class="integer">6</button>
+            <button class="integer" value="4">4</button>
+            <button class="integer" value="5">5</button>
+            <button class="integer" value="5">6</button>
             <button id="subtract">-</button>
             <br>
-            <button onclick="displayInt('1');" class="integer">1</button>
-            <button onclick="displayInt('2');" class="integer">2</button>
-            <button onclick="displayInt('3');" class="integer">3</button>
+            <button class="integer" value="1">1</button>
+            <button class="integer" value="2">2</button>
+            <button class="integer" value="3">3</button>
             <button id="add">+</button>
             <br>
-            <button onclick="displayInt('0');" id="zero-button">0</button>
-            <button onclick="displayAnswer();" id="equal-button">=</button>
+            <button class="integer" value="0">0</button>
+            <button id="equal-button">=</button>
         </div>
     </main>
 
-    <script type="text/javascript">
-        var display = document.getElementById("display");
-
-        var divideButton = document.getElementById("divide");
-        var multiplyButton = document.getElementById("multiply");
-        var subtractButton = document.getElementById("subtract");
-        var addButton = document.getElementById("add");
-        var equalButton = document.getElementById("equal-button");
-
-        var maxDigits = 99999999;
-        var int1 = 0;
-        var int2 = 0;
-
-        divideButton.addEventListener('click', divideInt);
-        multiplyButton.addEventListener('click', multiplyInt);
-        subtractButton.addEventListener('click', subtractInt);
-        addButton.addEventListener('click', addInt);
-
-        // function displays integer on the display
-        function displayInt(integer) {
-            if (display.textContent === '0') {
-                display.textContent = integer;
-            } else {
-                display.textContent = display.textContent + integer;
-            }
-        }
-
-        // function divides two integers
-        function divideInt() {
-            console.log("divide symbol clicked");
-        }
-
-        // function multiplies two integers
-        function multiplyInt() {
-            console.log("multiply symbol clicked");
-        }
-
-        // function subtracts two integers
-        function subtractInt() {
-            console.log("subtract symbol clicked");
-        }
-
-        // function adds two integers
-        function addInt() {
-            console.log("addition symbol clicked");
-        }
-
-        function clearEntry() {
-            display.textContent = '0';
-        }
-
-        function clearAll() {
-            display.textContent = '0';
-        }
-
-        // function displays answer
-        function displayAnswer() {
-            // answer
-        }
+    <script type="text/javascript" src="script.js">
+       
     </script>
 </body>
 
