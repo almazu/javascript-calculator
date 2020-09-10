@@ -1,29 +1,48 @@
 var display = document.querySelector("#display");
+var operator = document.querySelectorAll(".operator");
+var integer = document.querySelectorAll(".integer");
 
-var maxDigits = 99999999;
-var int1 = 0;
-var int2 = 0;
+const MAX_DIGITS = 9999999;
+var first, second, operator, temp;
 
-document.querySelector("#divide").addEventListener('click', function() { 
-    console.log("divide");
-    return '/';
-});
+// event listeners //
 
-document.querySelector("#multiply").addEventListener('click', function () {
+// operator buttons
+operator.forEach(op => op.addEventListener('click', function () {
+    if (op.getAttribute("value") === '/') {
+        console.log("divide by");
+        display.textContent += ' / '
+    } else if (op.getAttribute("value") === '*') {
+        console.log("times");
+        display.textContent += ' * '
+    } else if (op.getAttribute("value") === '-') {
+        console.log("minus");
+        display.textContent += ' - '
+    } else if (op.getAttribute("value") === '+') {
+        console.log("plus");
+        display.textContent += ' + '
+    } else if (op.getAttribute("value") === '=') {
+        console.log("equals");
+        display.textContent += ' = '
+    } else {
+        console.log("error");
+        display.textContent += ' E '
+    }
+}));
 
-});
-
-document.querySelector("#subtract").addEventListener('click', function () {
-    
-});
-
-document.querySelector("#add").addEventListener('click', function () {
-    
-});
-
-document.querySelector("#equal-button").addEventListener('click', function () {
-    // calculate and return answer
-});
+// integer buttons
+integer.forEach(int => int.addEventListener('click', function () {
+    if (display.textContent === '0') {
+        display.textContent = int.getAttribute("value");
+    } else {
+        if (display.textContent > MAX_DIGITS) {
+            alert("Too many digits for this calculator.")
+            return false;
+        } else {
+            display.textContent += int.getAttribute("value");
+        }
+    }
+}));
 
 document.querySelector("#clear-all-button").addEventListener('click', function () {
     display.textContent = '0';
@@ -33,11 +52,3 @@ document.querySelector("#clear-all-button").addEventListener('click', function (
 document.querySelector("#clear-button").addEventListener('click', function () {
     display.textContent = '0';
 });
-
-document.querySelectorAll(".integer").forEach(integer => integer.addEventListener('click', function() {
-    if (display.textContent === '0') {
-        display.textContent = integer.getAttribute("value");
-    } else {
-        display.textContent += integer.getAttribute("value");
-    }
-}))
