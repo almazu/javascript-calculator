@@ -1,6 +1,7 @@
 var display = document.querySelector("#display");
-var operator = document.querySelectorAll(".operator");
-var integer = document.querySelectorAll(".integer");
+var temp = document.querySelector("#temp");
+var operatorBtn = document.querySelectorAll(".operator");
+var integerBtn = document.querySelectorAll(".integer");
 
 const MAX_DIGITS = 9999999;
 var first, second, operator, temp;
@@ -8,30 +9,38 @@ var first, second, operator, temp;
 // event listeners //
 
 // operator buttons
-operator.forEach(op => op.addEventListener('click', function () {
-    if (op.getAttribute("value") === '/') {
-        console.log("divide by");
-        display.textContent += ' / '
-    } else if (op.getAttribute("value") === '*') {
-        console.log("times");
-        display.textContent += ' * '
-    } else if (op.getAttribute("value") === '-') {
-        console.log("minus");
-        display.textContent += ' - '
-    } else if (op.getAttribute("value") === '+') {
-        console.log("plus");
-        display.textContent += ' + '
-    } else if (op.getAttribute("value") === '=') {
-        console.log("equals");
-        display.textContent += ' = '
-    } else {
-        console.log("error");
-        display.textContent += ' E '
+operatorBtn.forEach(op => op.addEventListener('click', function () {
+    switch (op.getAttribute("value")) {
+        case "/":
+            console.log("divide by");
+            display.textContent += ' / ';
+            break;
+        case "*":
+            console.log("times");
+            display.textContent += ' * '
+            break;
+        case "-":
+            console.log("minus");
+            display.textContent += ' - '
+            break;
+        case "+":
+            console.log("plus");
+            display.textContent += ' + '
+            break;
+        case "=":
+            console.log("equals");
+            display.textContent += ' = ';
+            // TODO: Calculate and display answer
+            break;
+        default:
+            console.log("error");
+            display.textContent += ' E '
+            break;
     }
 }));
 
 // integer buttons
-integer.forEach(int => int.addEventListener('click', function () {
+integerBtn.forEach(int => int.addEventListener('click', function () {
     if (display.textContent === '0') {
         display.textContent = int.getAttribute("value");
     } else {
