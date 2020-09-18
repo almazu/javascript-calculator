@@ -1,63 +1,91 @@
-var display = document.querySelector("#display");
-var temp = document.querySelector("#temp");
-var operatorBtn = document.querySelectorAll(".operator");
-var integerBtn = document.querySelectorAll(".integer");
+// calculator object //
+const calculator = {
+    displayValue: '0',
+    firstInteger: null,
+    isWaiting: false,
+    operator: null
+}
 
-const MAX_DIGITS = 9999999;
-var first, second, operator, temp;
+// functions //
+
+// function handles input
+function handleInt(integer) {
+    const { displayValue, isWaiting } = calculator;
+    const MAX_DIGITS = 9999999;
+
+    if (isWaiting === true) {
+        calculator.displayValue = integer;
+        calculator.isWaiting = false;
+    } else {
+        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
+    }
+
+    if (displayValue > MAX_DIGITS) {
+        alert("Too many digits for this calculator.")
+        return false;
+    }
+}
+
+// updates calculator display
+function updateDisplay() {
+    const display = document.querySelector(".display");
+    display.value = calculator.displayValue;
+}
+
+// sets calculator object to default values
+function clearAll() {
+    calculator.displayValue = '0';
+    calculator.first = null;
+    calculator.waiting = false;
+    calculator.operator = null;
+}
+
+// function calculate(first, second, operator) {
+//     if (operator === '/') {
+//         return first / second;
+//     } else if (operator === '*') {
+//         return first * second;
+//     } else if (operator === '-') {
+//         return first - second;
+//     } else if (operator === '+') {
+//         return first + second;
+//     } else {
+//         return "E";
+//     }
+// }
 
 // event listeners //
 
-// operator buttons
-operatorBtn.forEach(op => op.addEventListener('click', function () {
-    switch (op.getAttribute("value")) {
+updateDisplay();
+
+// operator button
+const keypad = document.querySelector(".keypad");
+keypad.addEventListener('click', event => {
+    const { target } = event;
+    const { value } = target;
+
+    if (!target.matches('button')) {
+        return;
+    }
+
+    switch (value) {
         case "/":
-            console.log("divide by");
-            display.textContent += ' / ';
-            break;
         case "*":
-            console.log("times");
-            display.textContent += ' * '
-            break;
         case "-":
-            console.log("minus");
-            display.textContent += ' - '
-            break;
         case "+":
-            console.log("plus");
-            display.textContent += ' + '
+            handleOperator(value);
             break;
         case "=":
             console.log("equals");
-            display.textContent += ' = ';
-            // TODO: Calculate and display answer
+            break;
+        case "clear-all":
+            clearAll();
             break;
         default:
-            console.log("error");
-            display.textContent += ' E '
-            break;
+            if (Number.isInteger(value)) {
+                handleInt(value);
+            }
     }
-}));
 
-// integer buttons
-integerBtn.forEach(int => int.addEventListener('click', function () {
-    if (display.textContent === '0') {
-        display.textContent = int.getAttribute("value");
-    } else {
-        if (display.textContent > MAX_DIGITS) {
-            alert("Too many digits for this calculator.")
-            return false;
-        } else {
-            display.textContent += int.getAttribute("value");
-        }
-    }
-}));
-
-document.querySelector("#clear-all-button").addEventListener('click', function () {
-    display.textContent = '0';
-
-});
-
-document.querySelector("#clear-button").addEventListener('click', function () {
-    display.textContent = '0';
+    updateDisplay();
 });
