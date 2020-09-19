@@ -1,43 +1,101 @@
-var display = document.querySelector("#display");
+// calculator object //
+const calculator = {
+    displayValue: '0',
+    firstInteger: null,
+    isWaiting: false,
+    operator: null
+}
 
-var maxDigits = 99999999;
-var int1 = 0;
-var int2 = 0;
+// functions //
 
-document.querySelector("#divide").addEventListener('click', function() { 
-    console.log("divide");
-    return '/';
-});
-
-document.querySelector("#multiply").addEventListener('click', function () {
-
-});
-
-document.querySelector("#subtract").addEventListener('click', function () {
-    
-});
-
-document.querySelector("#add").addEventListener('click', function () {
-    
-});
-
-document.querySelector("#equal-button").addEventListener('click', function () {
-    // calculate and return answer
-});
-
-document.querySelector("#clear-all-button").addEventListener('click', function () {
-    display.textContent = '0';
-
-});
-
-document.querySelector("#clear-button").addEventListener('click', function () {
-    display.textContent = '0';
-});
-
-document.querySelectorAll(".integer").forEach(integer => integer.addEventListener('click', function() {
-    if (display.textContent === '0') {
-        display.textContent = integer.getAttribute("value");
+// function handles input
+function handleInt(integer) {
+    const { displayValue, isWaiting } = calculator;
+    const MAX_DIGITS = 9999999;
+    console.log("before if else");
+    if (isWaiting === true) {
+        calculator.displayValue = integer;
+        calculator.isWaiting = false;
+        console.log(isWaiting);
     } else {
-        display.textContent += integer.getAttribute("value");
+        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
+        console.log(displayValue);
+        console.log(integer);
+        console.log("inside else if");
+
+        if (displayValue > MAX_DIGITS) {
+            alert("Too many digits for this calculator.");
+            return false;
+        }
     }
-}))
+}
+
+function handleOperator(operator) {
+    // call calculate
+    //calculate(first,second,operator);
+}
+
+// updates calculator display
+function updateDisplay() {
+    const display = document.querySelector(".display");
+    display.value = calculator.displayValue;
+    console.log(calculator);
+}
+
+// sets calculator object to default values
+function clearAll() {
+    calculator.displayValue = '0';
+    calculator.first = null;
+    calculator.waiting = false;
+    calculator.operator = null;
+}
+
+function calculate(first, second, operator) {
+    if (operator === '/') {
+        return first / second;
+    } else if (operator === '*') {
+        return first * second;
+    } else if (operator === '-') {
+        return first - second;
+    } else if (operator === '+') {
+        return first + second;
+    } else {
+        return "E";
+    }
+}
+
+// event listeners //
+
+updateDisplay();
+
+// operator button
+const keypad = document.querySelector(".keypad");
+keypad.addEventListener('click', event => {
+    const { target } = event;
+    const { value } = target;
+    console.log(value);
+    if (!target.matches('button')) {
+        return;
+    }
+
+    switch (value) {
+        case "/":
+        case "*":
+        case "-":
+        case "+":
+        case "=":
+            handleOperator(value);
+            console.log(value);
+            break;
+        case "clear-all":
+            clearAll();
+            break;
+        default:
+            if (Number.isInteger(parseFloat(value))) {
+                console.log(value);
+                handleInt(value);
+            }
+    }
+
+    updateDisplay();
+});

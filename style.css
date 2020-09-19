@@ -20,26 +20,19 @@ button {
     border-radius: 15px;
 }
 
-#equal-button {
-    background-color: skyblue;
-}
-
-#zero-button {
-    width: 220px;
-}
-
-#clear-all-button {
+.clear-all-button {
     background-color: orange;
     width: 106px;
 }
 
-#clear-button {
+.clear-button {
     background-color: skyblue;
     width: 106px;
 }
 
-#display {
+.display {
     background-color: white;
+    text-align: right;
     margin-bottom: 10px;
     padding-right: 5px; 
     font-family: sans-serif;
@@ -47,4 +40,8 @@ button {
     font-size: 42px;
     border: solid 1px black;
     border-radius: 15px;
+}
+
+.equal-button {
+    background-color: green;
 }
