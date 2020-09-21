@@ -22,29 +22,33 @@ function handleInt(integer) {
         console.log(displayValue);
         console.log(integer);
         console.log("inside else if");
-
-        if (displayValue > MAX_DIGITS) {
-            alert("Too many digits for this calculator.");
-            return false;
-        }
-    }
-}
-
-function handleOperator(operator) {
-    // call calculate
-    //calculate(first,second,operator);
-
-    if (isWaiting === true) {
-        calculator.displayValue = integer;
-        calculator.isWaiting = false;
-    } else {
-        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
     }
 
     if (displayValue > MAX_DIGITS) {
-        alert("Too many digits for this calculator.")
+        alert("Too many digits for this calculator.");
         return false;
     }
+}
+
+function handleOperator(op) {
+    const { first, displayValue, operator } = calculator;
+    const input = parseFloat(displayValue);
+   
+    if (operator && calculator.isWaiting) {
+        calculator.operator = op;
+        return;
+    }
+
+    if (first == null && !isNaN(input)) {
+        calculator.first = input;
+    } else if (operator) {
+        const result = calculate(first, input, operator);
+        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
+        calculator.first = result;
+    }
+
+    calculator.isWaiting = true;
+    calculator.operator = op;
 }
 
 // updates calculator display
@@ -75,19 +79,6 @@ function calculate(first, second, operator) {
         return "E";
     }
 }
-// function calculate(first, second, operator) {
-//     if (operator === '/') {
-//         return first / second;
-//     } else if (operator === '*') {
-//         return first * second;
-//     } else if (operator === '-') {
-//         return first - second;
-//     } else if (operator === '+') {
-//         return first + second;
-//     } else {
-//         return "E";
-//     }
-// }
 
 // event listeners //
 
@@ -118,30 +109,6 @@ keypad.addEventListener('click', event => {
         default:
             if (Number.isInteger(parseFloat(value))) {
                 console.log(value);
-                handleInt(value);
-            }
-    }
-
-
-    if (!target.matches('button')) {
-        return;
-    }
-
-    switch (value) {
-        case "/":
-        case "*":
-        case "-":
-        case "+":
-            handleOperator(value);
-            break;
-        case "=":
-            console.log("equals");
-            break;
-        case "clear-all":
-            clearAll();
-            break;
-        default:
-            if (Number.isInteger(value)) {
                 handleInt(value);
             }
     }

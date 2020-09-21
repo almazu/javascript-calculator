@@ -22,12 +22,7 @@ button {
 
 .clear-all-button {
     background-color: orange;
-    width: 106px;
-}
-
-.clear-button {
-    background-color: skyblue;
-    width: 106px;
+    width: 70px;
 }
 
 .display {
@@ -44,4 +39,11 @@ button {
 
 .equal-button {
     background-color: green;
+    height: 160px;
+    display: block;
+    float: right;
+    width: 70px;
+    margin-left: 5px;
 }
+
+.zero-button { width: 220px; }
