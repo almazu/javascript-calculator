@@ -33,6 +33,18 @@ function handleInt(integer) {
 function handleOperator(operator) {
     // call calculate
     //calculate(first,second,operator);
+
+    if (isWaiting === true) {
+        calculator.displayValue = integer;
+        calculator.isWaiting = false;
+    } else {
+        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
+    }
+
+    if (displayValue > MAX_DIGITS) {
+        alert("Too many digits for this calculator.")
+        return false;
+    }
 }
 
 // updates calculator display
@@ -63,6 +75,19 @@ function calculate(first, second, operator) {
         return "E";
     }
 }
+// function calculate(first, second, operator) {
+//     if (operator === '/') {
+//         return first / second;
+//     } else if (operator === '*') {
+//         return first * second;
+//     } else if (operator === '-') {
+//         return first - second;
+//     } else if (operator === '+') {
+//         return first + second;
+//     } else {
+//         return "E";
+//     }
+// }
 
 // event listeners //
 
@@ -93,6 +118,30 @@ keypad.addEventListener('click', event => {
         default:
             if (Number.isInteger(parseFloat(value))) {
                 console.log(value);
+                handleInt(value);
+            }
+    }
+
+
+    if (!target.matches('button')) {
+        return;
+    }
+
+    switch (value) {
+        case "/":
+        case "*":
+        case "-":
+        case "+":
+            handleOperator(value);
+            break;
+        case "=":
+            console.log("equals");
+            break;
+        case "clear-all":
+            clearAll();
+            break;
+        default:
+            if (Number.isInteger(value)) {
                 handleInt(value);
             }
     }
