@@ -18,6 +18,8 @@ button {
     margin-bottom: 5px;
     font-size: 24px;
     border-radius: 15px;
+    background-color: white;
+    color: black;
 }
 
 .clear-all-button {
@@ -46,4 +48,20 @@ button {
     margin-left: 5px;
 }
 
-.zero-button { width: 220px; }
+#zero-button { width: 220px; }
+
+.on {
+    border: 1px outset;
+    color: #369;
+    background: #efefefef;
+    width: auto;
+    margin: 5px;
+}
+
+.off {
+    border: 1px outset;
+    color: #369;
+    background-color: gray;
+    width: auto;
+    margin: 5px;
+}

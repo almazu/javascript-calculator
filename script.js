@@ -12,28 +12,21 @@ const calculator = {
 function handleInt(integer) {
     const { displayValue, isWaiting } = calculator;
     const MAX_DIGITS = 9999999;
-    console.log("before if else");
-    if (isWaiting === true) {
-        calculator.displayValue = integer;
-        calculator.isWaiting = false;
-        console.log(isWaiting);
-    } else {
-        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
-        console.log(displayValue);
-        console.log(integer);
-        console.log("inside else if");
-    }
 
     if (displayValue > MAX_DIGITS) {
-        alert("Too many digits for this calculator.");
         return false;
+    } else if (isWaiting === true) {
+        calculator.displayValue = integer;
+        calculator.isWaiting = false;
+    } else {
+        calculator.displayValue = displayValue === '0' ? integer : displayValue + integer;
     }
 }
 
 function handleOperator(op) {
     const { first, displayValue, operator } = calculator;
     const input = parseFloat(displayValue);
-   
+
     if (operator && calculator.isWaiting) {
         calculator.operator = op;
         return;
@@ -55,7 +48,6 @@ function handleOperator(op) {
 function updateDisplay() {
     const display = document.querySelector(".display");
     display.value = calculator.displayValue;
-    console.log(calculator);
 }
 
 // sets calculator object to default values
@@ -80,6 +72,14 @@ function calculate(first, second, operator) {
     }
 }
 
+function toggleStyle(element) {
+    if (element.className == 'on') {
+        element.className = 'off';
+    } else {
+        element.className = 'on';
+    }
+}
+
 // event listeners //
 
 updateDisplay();
@@ -89,7 +89,6 @@ const keypad = document.querySelector(".keypad");
 keypad.addEventListener('click', event => {
     const { target } = event;
     const { value } = target;
-    console.log(value);
     if (!target.matches('button')) {
         return;
     }
@@ -101,17 +100,49 @@ keypad.addEventListener('click', event => {
         case "+":
         case "=":
             handleOperator(value);
-            console.log(value);
             break;
         case "clear-all":
             clearAll();
             break;
         default:
             if (Number.isInteger(parseFloat(value))) {
-                console.log(value);
                 handleInt(value);
             }
     }
 
     updateDisplay();
+});
+
+// dark mode
+const dark = document.querySelector("#dark-mode");
+dark.addEventListener('click', event => {
+    if (document.querySelector(".on")) {
+        document.querySelector("#main-dark").style.backgroundColor = '#212121';
+        document.querySelector("#input-dark").style.backgroundColor = 'silver';
+
+        document.querySelectorAll(".btn-dark").forEach((btn) => {
+            btn.style.backgroundColor = '#424242';
+            btn.style.color = 'white';
+        });
+
+        document.querySelector(".equal-button").style.backgroundColor = '#486581';
+        document.querySelector(".equal-button").style.color = 'white';
+
+        document.querySelector(".clear-all-button").style.backgroundColor = '#9E9E9E';
+        document.querySelector(".clear-all-button").style.color = 'white';
+    } else {
+        document.querySelector("#main-dark").style.backgroundColor = 'silver';
+        document.querySelector("#input-dark").style.backgroundColor = 'white';
+
+        document.querySelectorAll(".btn-dark").forEach((btn) => {
+            btn.style.backgroundColor = 'white';
+            btn.style.color = 'black';
+        });
+
+        document.querySelector(".equal-button").style.backgroundColor = 'green';
+        document.querySelector(".equal-button").style.color = 'black';
+
+        document.querySelector(".clear-all-button").style.backgroundColor = 'orange';
+        document.querySelector(".clear-all-button").style.color = 'black';
+    }
 });
